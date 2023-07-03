@@ -191,7 +191,7 @@ void SimpleEventDisplayGUI::initOccupancyHists(void)
   TCanvas* c = nullptr;
 
   if (mShowSides) {
-    //histograms and canvases for occupancy values A-Side
+    // histograms and canvases for occupancy values A-Side
     c = new TCanvas("OccupancyValsA", "OccupancyValsA", 0 * w - 1, 0 * h, w, h);
 
     c->Connect("ProcessedEvent(Int_t,Int_t,Int_t,TObject*)",
@@ -200,11 +200,11 @@ void SimpleEventDisplayGUI::initOccupancyHists(void)
 
     mHOccupancyA = new TH2F("hOccupancyValsA", "Occupancy Values Side A;x (cm);y (cm)", 330, -250, 250, 330, -250, 250);
     mHOccupancyA->SetStats(kFALSE);
-    mHOccupancyA->SetUniqueID(0); //A-Side
+    mHOccupancyA->SetUniqueID(0); // A-Side
     mHOccupancyA->Draw("colz");
     painter::drawSectorsXY(Side::A);
 
-    //histograms and canvases for occupancy values C-Side
+    // histograms and canvases for occupancy values C-Side
     c = new TCanvas("OccupancyValsC", "OccupancyValsC", 0 * w - 1, 1 * h + hOff, w, h);
 
     c->Connect("ProcessedEvent(Int_t,Int_t,Int_t,TObject*)",
@@ -212,12 +212,12 @@ void SimpleEventDisplayGUI::initOccupancyHists(void)
                "selectSectorExec(int,int,int,TObject*)");
     mHOccupancyC = new TH2F("hOccupancyValsC", "Occupancy Values Side C;x (cm);y (cm)", 330, -250, 250, 330, -250, 250);
     mHOccupancyC->SetStats(kFALSE);
-    mHOccupancyC->SetUniqueID(1); //C-Side
+    mHOccupancyC->SetUniqueID(1); // C-Side
     mHOccupancyC->Draw("colz");
     painter::drawSectorsXY(Side::C);
   }
 
-  //histograms and canvases for occupancy values IROC
+  // histograms and canvases for occupancy values IROC
   c = new TCanvas("OccupancyValsI", "OccupancyValsI", -1 * (w + vOff), 0 * h, w, h);
 
   c->Connect("ProcessedEvent(Int_t,Int_t,Int_t,TObject*)",
@@ -228,7 +228,7 @@ void SimpleEventDisplayGUI::initOccupancyHists(void)
   mHOccupancyIROC->SetStats(kFALSE);
   mHOccupancyIROC->Draw("colz");
 
-  //histograms and canvases for occupancy values OROC
+  // histograms and canvases for occupancy values OROC
   c = new TCanvas("OccupancyValsO", "OccupancyValsO", -1 * (w + vOff), 1 * h + hOff, w, h);
 
   c->Connect("ProcessedEvent(Int_t,Int_t,Int_t,TObject*)",
@@ -247,15 +247,15 @@ void SimpleEventDisplayGUI::deleteOccupancyHists(void)
   delete gROOT->GetListOfCanvases()->FindObject("OccupancyValsA");
   delete mHOccupancyA;
   mHOccupancyA = nullptr;
-  
+
   delete gROOT->GetListOfCanvases()->FindObject("OccupancyValsC");
   delete mHOccupancyC;
   mHOccupancyC = nullptr;
-  
+
   delete gROOT->GetListOfCanvases()->FindObject("OccupancyValsO");
   delete mHOccupancyOROC;
   mHOccupancyOROC = nullptr;
-  
+
   delete gROOT->GetListOfCanvases()->FindObject("OccupancyValsI");
   delete mHOccupancyIROC;
   mHOccupancyIROC = nullptr;
@@ -300,7 +300,7 @@ void SimpleEventDisplayGUI::update(TString clist)
 void SimpleEventDisplayGUI::resetHists(int type, HistogramType histogramType)
 {
   if (!type) {
-    switch(histogramType) {
+    switch (histogramType) {
       case MaxValues:
         if (mHMaxA) {
           mHMaxA->Reset();
@@ -321,7 +321,7 @@ void SimpleEventDisplayGUI::resetHists(int type, HistogramType histogramType)
         break;
     }
   }
-  switch(histogramType) {
+  switch (histogramType) {
     case MaxValues:
       if (mHMaxIROC) {
         mHMaxIROC->Reset();
@@ -810,7 +810,8 @@ void SimpleEventDisplayGUI::startGUI(int maxTimeBins)
 }
 
 //_____________________________________________________________________________
-void SimpleEventDisplayGUI::applySignalThreshold() {
+void SimpleEventDisplayGUI::applySignalThreshold()
+{
   UInt_t signalThreshold = TString(mSignalThresholdValue->GetText()).Atoi();
   mEvDisp.setSignalThreshold(signalThreshold);
   callEventNumber();
